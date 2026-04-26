@@ -1,0 +1,703 @@
+/* ============================================================
+   Apoio Migrante IA PT — style.css
+   Design system com efeitos visuais premium
+   ============================================================ */
+
+/* ── Fontes & Base ───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --navy:        #0A2540;
+  --blue:        #1E5FB8;
+  --blue-light:  #E6F1FB;
+  --emerald:     #1D9E75;
+  --emerald-bg:  #E1F5EE;
+  --amber:       #BA7517;
+  --red-bg:      #FCEBEB;
+  --surface:     #F4F7FB;
+  --white:       #ffffff;
+  --border:      rgba(10,37,64,.08);
+  --text-muted:  rgba(10,37,64,.55);
+  --shadow-sm:   0 1px 3px rgba(10,37,64,.08), 0 1px 2px rgba(10,37,64,.04);
+  --shadow-md:   0 4px 16px rgba(10,37,64,.1),  0 2px 6px rgba(10,37,64,.06);
+  --shadow-lg:   0 16px 48px rgba(10,37,64,.14), 0 6px 16px rgba(10,37,64,.08);
+  --shadow-xl:   0 32px 80px rgba(10,37,64,.18), 0 12px 32px rgba(10,37,64,.1);
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-2xl:  24px;
+  --transition:  0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--surface);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Fundo com malha subtil */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(30,95,184,.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(10,37,64,.03) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230A2540' fill-opacity='0.018'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ── Scrollbar global ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(10,37,64,.15);
+  border-radius: 99px;
+  transition: background var(--transition);
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(10,37,64,.3); }
+
+/* ── Cores e gradientes ──────────────────────────────────── */
+.navy      { background: var(--navy); }
+.navy-grad {
+  background: linear-gradient(135deg, #0A2540 0%, #1A4A9F 60%, #1E5FB8 100%);
+}
+.text-navy { color: var(--navy); }
+
+/* ── Ecrãs ───────────────────────────────────────────────── */
+.screen { display: none; }
+.screen.active {
+  display: block;
+  animation: screenIn var(--transition-slow) both;
+}
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Navegação top ───────────────────────────────────────── */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(10,37,64,.07);
+  box-shadow: 0 1px 0 rgba(10,37,64,.04), var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.top-nav:hover { box-shadow: 0 1px 0 rgba(10,37,64,.06), var(--shadow-md); }
+
+/* ── Nav tabs ────────────────────────────────────────────── */
+.nav-tab {
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: rgba(10,37,64,.6);
+  transition: all var(--transition);
+  position: relative;
+  user-select: none;
+}
+
+.nav-tab:hover {
+  color: var(--navy);
+  background: rgba(10,37,64,.05);
+}
+
+.nav-tab.active {
+  background: var(--navy);
+  color: white;
+  box-shadow: 0 2px 8px rgba(10,37,64,.25), 0 1px 3px rgba(10,37,64,.15);
+}
+
+.nav-tab.active:hover {
+  background: #0d2d4a;
+  color: white;
+}
+
+/* ── Cards / superfícies ─────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(10,37,64,.06);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* ── Stat cards ──────────────────────────────────────────── */
+.stat-card {
+  background: #FAFCFF;
+  border: 0.5px solid rgba(10,37,64,.06);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  transition: all var(--transition);
+}
+
+.stat-card:hover {
+  background: white;
+  border-color: rgba(30,95,184,.15);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(30,95,184,.08);
+  transform: translateY(-2px);
+}
+
+/* ── Botões ──────────────────────────────────────────────── */
+button, .btn {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+button:active { transform: scale(0.97); }
+
+/* Ripple effect */
+button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.35) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+button:active::after { opacity: 1; }
+
+/* Botões navy */
+button.navy, .navy-grad[onclick] {
+  box-shadow: 0 2px 8px rgba(10,37,64,.25), 0 1px 3px rgba(10,37,64,.12);
+}
+button.navy:hover, .navy-grad[onclick]:hover {
+  box-shadow: 0 6px 20px rgba(10,37,64,.3), 0 2px 8px rgba(10,37,64,.15);
+  transform: translateY(-1px);
+}
+
+/* ── Inputs ──────────────────────────────────────────────── */
+input {
+  transition: all var(--transition);
+  outline: none;
+}
+
+.input-wrap {
+  transition: all var(--transition);
+}
+
+.input-wrap:focus-within {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(30,95,184,.1);
+}
+
+/* ── AI Insight banner ───────────────────────────────────── */
+.insight-banner {
+  background: linear-gradient(135deg, #0A2540 0%, #1A4A9F 50%, #1E5FB8 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.insight-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 50%;
+  height: 150%;
+  background: radial-gradient(ellipse, rgba(93,202,165,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* ── Timeline ────────────────────────────────────────────── */
+.timeline-step {
+  transition: all var(--transition);
+}
+.timeline-step:hover { transform: scale(1.05); }
+
+/* Linha de conexão entre steps */
+.timeline-connector {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  right: -50%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(30,95,184,.3) 0%, rgba(30,95,184,.1) 100%);
+}
+.timeline-connector.done {
+  background: linear-gradient(90deg, #1E5FB8 0%, rgba(30,95,184,.4) 100%);
+}
+
+/* ── Dropzone ────────────────────────────────────────────── */
+.dropzone {
+  transition: all var(--transition);
+  position: relative;
+}
+
+.dropzone::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(30,95,184,.15), transparent, rgba(30,95,184,.1));
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.dropzone:hover::before { opacity: 1; }
+
+.drop-active {
+  border-color: var(--blue) !important;
+  background: rgba(30,95,184,.05) !important;
+  box-shadow: 0 0 0 4px rgba(30,95,184,.1), inset 0 0 40px rgba(30,95,184,.04);
+  transform: scale(1.005);
+}
+
+.drop-active::before { opacity: 1; }
+
+/* ── Documentos / ficheiros ──────────────────────────────── */
+.doc-item {
+  background: white;
+  border: 1px solid rgba(10,37,64,.07);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: all var(--transition);
+  animation: itemIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.doc-item:hover {
+  border-color: rgba(30,95,184,.2);
+  box-shadow: var(--shadow-md);
+  transform: translateX(3px);
+}
+
+.doc-item.approved  { border-left: 3px solid var(--emerald); }
+.doc-item.rejected  { border-left: 3px solid #F09595; }
+.doc-item.processing { border-left: 3px solid var(--blue); }
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Status badges ───────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.badge-approved {
+  background: var(--emerald-bg);
+  color: #04342C;
+  box-shadow: 0 0 0 1px rgba(29,158,117,.15);
+}
+
+.badge-rejected {
+  background: var(--red-bg);
+  color: #501313;
+  box-shadow: 0 0 0 1px rgba(240,149,149,.3);
+}
+
+.badge-processing {
+  background: var(--blue-light);
+  color: #042C53;
+  box-shadow: 0 0 0 1px rgba(30,95,184,.15);
+}
+
+.badge-pending {
+  background: #FFF8EC;
+  color: #633806;
+  box-shadow: 0 0 0 1px rgba(186,117,23,.15);
+}
+
+/* ── Notificações ────────────────────────────────────────── */
+.notif-item {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  border: 1px solid rgba(10,37,64,.06);
+  transition: all var(--transition);
+  animation: itemIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.notif-item:hover {
+  border-color: rgba(30,95,184,.15);
+  box-shadow: var(--shadow-md);
+  transform: translateX(2px);
+}
+
+.notif-item.unread {
+  border-left: 3px solid var(--blue);
+  background: linear-gradient(to right, rgba(230,241,251,.3) 0%, white 40%);
+}
+
+/* ── Toast ───────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  padding: 13px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0;
+  transform: translateY(16px) scale(0.95);
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(12px);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast.success {
+  background: rgba(225,245,238,.95);
+  color: #04342C;
+  border: 1px solid #9FE1CB;
+}
+
+.toast.error {
+  background: rgba(252,235,235,.95);
+  color: #501313;
+  border: 1px solid #F09595;
+}
+
+.toast.info {
+  background: rgba(230,241,251,.95);
+  color: #042C53;
+  border: 1px solid #B5D4F4;
+}
+
+/* ── Pulse dot ───────────────────────────────────────────── */
+.pulse-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(0.8); }
+}
+
+/* ── Shimmer skeleton ────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(10,37,64,.06) 0%,
+    rgba(30,95,184,.06) 40%,
+    rgba(10,37,64,.06) 80%,
+    rgba(10,37,64,.06) 100%
+  );
+  background-size: 300% 100%;
+  animation: shimmerAnim 2s linear infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmerAnim {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Chat FAB ────────────────────────────────────────────── */
+#chatFab {
+  background: linear-gradient(135deg, #0A2540 0%, #1E5FB8 100%);
+  box-shadow: 0 8px 32px rgba(10,37,64,.3), 0 4px 12px rgba(30,95,184,.2);
+  transition: all var(--transition);
+  animation: fabIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+#chatFab:hover {
+  box-shadow: 0 12px 40px rgba(10,37,64,.35), 0 6px 16px rgba(30,95,184,.25);
+  transform: translateY(-3px) scale(1.05);
+}
+
+#chatFab:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Anel pulsante à volta do FAB */
+#chatFab::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(30,95,184,.25);
+  animation: fabRing 3s ease-in-out infinite;
+}
+
+@keyframes fabRing {
+  0%, 100% { transform: scale(1); opacity: .6; }
+  50%       { transform: scale(1.15); opacity: 0; }
+}
+
+@keyframes fabIn {
+  from { opacity: 0; transform: scale(0.5) rotate(-90deg); }
+  to   { opacity: 1; transform: scale(1)   rotate(0deg); }
+}
+
+/* ── Chat panel ──────────────────────────────────────────── */
+#chatPanel {
+  width: 360px;
+  height: 520px;
+  animation: panelIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(10,37,64,.1);
+  backdrop-filter: blur(20px);
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ── Chat messages ───────────────────────────────────────── */
+#chatMessages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10,37,64,.12) transparent;
+}
+
+#chatMessages::-webkit-scrollbar { width: 4px; }
+#chatMessages::-webkit-scrollbar-thumb {
+  background: rgba(10,37,64,.12);
+  border-radius: 99px;
+}
+
+/* Mensagens com animação de entrada */
+#chatMessages > div {
+  animation: msgIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Task items ──────────────────────────────────────────── */
+.task-item {
+  background: white;
+  border: 1px solid rgba(10,37,64,.07);
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+}
+
+.task-item:hover {
+  border-color: rgba(30,95,184,.2);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(2px);
+}
+
+.task-item.locked {
+  opacity: .65;
+  background: #FAFCFF;
+  border-style: dashed;
+}
+
+/* ── Glassmorphism overlay ───────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.5);
+}
+
+/* ── Glow effects ────────────────────────────────────────── */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(30,95,184,.2);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 16px rgba(29,158,117,.2);
+}
+
+/* ── Secção login ────────────────────────────────────────── */
+.login-card {
+  box-shadow: var(--shadow-xl);
+  transition: transform var(--transition-slow);
+}
+
+.login-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ── Logo icon ───────────────────────────────────────────── */
+.logo-icon {
+  background: linear-gradient(135deg, #0A2540 0%, #1E5FB8 100%);
+  box-shadow: 0 4px 12px rgba(10,37,64,.2);
+  transition: all var(--transition);
+}
+
+.logo-icon:hover {
+  box-shadow: 0 6px 20px rgba(10,37,64,.3);
+  transform: scale(1.05) rotate(-3deg);
+}
+
+/* ── Payment card verde ──────────────────────────────────── */
+.payment-card-paid {
+  background: linear-gradient(135deg, #E1F5EE 0%, #F5FBF8 100%);
+  border: 0.5px solid #9FE1CB;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-card-paid::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(29,158,117,.08) 0%, transparent 70%);
+}
+
+/* ── Linha divisória animada ─────────────────────────────── */
+.divider-animated {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(30,95,184,.15) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: dividerAnim 4s linear infinite;
+}
+
+@keyframes dividerAnim {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Hover sobre rows de navegação interna ───────────────── */
+.inner-nav-tab {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: rgba(10,37,64,.55);
+  font-weight: 500;
+}
+
+.inner-nav-tab:hover {
+  background: rgba(30,95,184,.07);
+  color: var(--navy);
+}
+
+.inner-nav-tab.active-inner {
+  background: white;
+  color: var(--navy);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Botão de logout ─────────────────────────────────────── */
+#logoutBtn {
+  transition: all var(--transition);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+}
+
+#logoutBtn:hover {
+  background: rgba(240,89,89,.08);
+  color: #c0392b;
+}
+
+/* ── Feature cards (home) ────────────────────────────────── */
+.feature-stat {
+  transition: all var(--transition);
+}
+
+.feature-stat:hover {
+  background: rgba(30,95,184,.03);
+}
+
+/* ── Badge de notificação ────────────────────────────────── */
+#navBadge, #dbNotifBadge {
+  animation: badgePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes badgePop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Input de chat ───────────────────────────────────────── */
+#chatInput {
+  transition: all var(--transition);
+}
+
+#chatInput:focus {
+  outline: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  #chatPanel {
+    width: calc(100vw - 24px);
+    right: 12px;
+    height: 70vh;
+  }
+
+  .toast {
+    left: 12px;
+    right: 12px;
+    bottom: 80px;
+    max-width: none;
+  }
+}
+
+/* ── Utilitários extra ───────────────────────────────────── */
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.no-select { user-select: none; }
+
+/* Transição suave em todos os elementos interativos */
+a, button, [onclick], [role="button"] {
+  transition: all var(--transition);
+}
